@@ -209,9 +209,78 @@ Nuance : avec une seule méthode `createDoor`, c'est techniquement une méthode 
 
 ---
 
+## 9. Commande (Command)
+
+Encapsule une opération dans un objet, pour pouvoir l'exécuter ET l'annuler. Exemple : problème des bidons d'eau.
+
+Rôles : Client = `Simulator`, Invoker = `Historique`, Receiver = `Can`.
+
+```
+ +-----------------------------+  historique  +-----------------------------+
+ |     Simulator (Client)      |------------->|    Historique (Invoker)     |
+ +-----------------------------+      1       +-----------------------------+
+ | - can : Can[]               |              | - pile : Stack<Command>     |
+ | - historique : Historique   |              +-----------------------------+
+ +-----------------------------+              | + run(c : Command)          |
+        <>                                    | + annuler()                 |
+        | can                                 +-----------------------------+
+        | 1..*                                              <>
+        |                                                    | pile 0..*
+        |                                                    v
+        |                                         +----------------------+
+        |                                         |     «interface»      |
+        |                                         |       Command        |
+        |                                         +----------------------+
+        |                                         | + exec()             |
+        |                                         | + undo()             |
+        |                                         +----------------------+
+        |                                              ^            ^
+        |                                              |            |
+        |                                       +------+-----+  +---+------------+
+        |                                       |  Remplir   |  |    Verser      |
+        |                                       +------------+  +----------------+
+        |                                       | - avant:int|  | - quantite:int |
+        |                                       +------------+  +----------------+
+        |                                       | + exec()   |  | + exec()       |
+        |                                       | + undo()   |  | + undo()       |
+        |                                       +-----+------+  +---+-----+------+
+        |                                             | can         | src | dst
+        v                                             v             v     v
+ +------------------------------------------------------------------------------+
+ |                              Can (Receiver)                                  |
+ +------------------------------------------------------------------------------+
+ | - niveau : int                                                               |
+ | - capacite : int                                                             |
+ +------------------------------------------------------------------------------+
+ | + remplir()    + vider()    + setNiveau(n : int)                             |
+ +------------------------------------------------------------------------------+
+
+ (Vider : idem Remplir)
+
+ Historique.run(c)    : c.exec(); pile.push(c)
+ Historique.annuler() : c = pile.pop(); c.undo()
+ Usage                : historique.run(new Remplir(can[0]));
+                        historique.run(new Verser(can[0], can[1]))
+ Remplir.exec()       : avant = can.niveau; can.remplir()
+ Remplir.undo()       : can.setNiveau(avant)
+ Verser.exec()        : quantite = min(src.niveau, dst.capacite - dst.niveau);
+                        src.niveau -= quantite; dst.niveau += quantite
+ Verser.undo()        : dst.niveau -= quantite; src.niveau += quantite
+```
+
+A retenir :
+- `Simulator` (Client) possède `can[]` et un `Historique`, crée les commandes avec `can[i]` et les passe à l'`Historique`.
+- `Historique` (Invoker) garde la pile et ne connaît que `Command`, jamais `Remplir` ni `Can`.
+- `Can` (Receiver) fait le vrai travail.
+- Chaque commande sauvegarde ce qu'il faut pour défaire (`avant`, `quantite`) au moment du `exec()`, pas avant.
+- Annuler plusieurs fois = dépiler (dernier exécuté = premier annulé).
+
+---
+
 ## Pièges d'examen
 
 - Adapter / Proxy / Décorateur enveloppent tous un objet. Adapter change l'interface, Proxy garde la même et contrôle l'accès, Décorateur garde la même et ajoute du comportement.
 - Façade simplifie plusieurs classes, Adapter rend une classe compatible.
 - Composite : `0..*` enfants. Décorateur : `1` composant.
 - Méthode de fabrique : héritage. Fabrique abstraite : objet fabrique passé au client, famille de produits.
+- Commande : le `undo()` doit restaurer l'état exact d'avant, donc la commande mémorise l'état (ou la quantité réellement transférée) dans `exec()`.
