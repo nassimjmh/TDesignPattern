@@ -275,6 +275,73 @@ A retenir :
 - Chaque commande sauvegarde ce qu'il faut pour défaire (`avant`, `quantite`) au moment du `exec()`, pas avant.
 - Annuler plusieurs fois = dépiler (dernier exécuté = premier annulé).
 
+## 10. Observateur (Observer)
+
+Un objet (l'observable) prévient automatiquement ceux qui s'y sont abonnés (les observeurs) quand son état change. Exemple : les fleurs fleurissent selon la saison, puis les pollinisateurs viennent butiner les fleurs ouvertes.
+
+Rôles : `CycleSaison` = Observable. `Fleur` = Observeur de `CycleSaison` ET Observable pour les `Pollinisateur`. `Pollinisateur` = Observeur de `Fleur`.
+
+```
+ +-------------------------+      saison      +----------------------------------+
+ |      «enumeration»      |<-----------------|   CycleSaison  (Observable)      |
+ |         Saison          |        1         +----------------------------------+
+ +-------------------------+                  | - saison : Saison                |
+ | PRINTEMPS               |                  | - fleurs : List<Fleur>           |
+ | ETE                     |                  +----------------------------------+
+ | AUTOMNE                 |                  | + abonner(f : Fleur)             |
+ | HIVER                   |                  | + desabonner(f : Fleur)          |
+ +-------------------------+                  | + changerSaison(s : Saison)      |
+            ^                                 | + notifier()                     |
+            | saisonFloraison                 +----------------<>----------------+
+            | 1                                                | fleurs
+            |                                                  | 0..*
+            |                                                  v
+ +----------+--------------------------------------------------------------+
+ |  «abstract» Fleur                                                        |
+ |  (Observeur de CycleSaison, Observable pour Pollinisateur)               |
+ +--------------------------------------------------------------------------+
+ | - saisonFloraison : Saison                                               |
+ | - ouverte : boolean                                                      |
+ | - pollinisateurs : List<Pollinisateur>                                   |
+ +--------------------------------------------------------------------------+
+ | + saisonChangee(s : Saison)                                              |
+ | + abonner(p : Pollinisateur)                                             |
+ | + desabonner(p : Pollinisateur)                                          |
+ | + notifier()                                                             |
+ | + estOuverte() : boolean                                                 |
+ +----------------------------------+---------------------<>----------------+
+        ^                 ^                                | pollinisateurs
+        |                 |                                | 0..*
+   +---------+      +-----------+                          v
+   | Tulipe  |      | Tournesol |            +-----------------------------------+
+   +---------+      +-----------+            | «abstract» Pollinisateur          |
+                                             | (Observeur de Fleur)              |
+                                             +-----------------------------------+
+                                             | + butiner(f : Fleur)  {abstract}  |
+                                             +-----------------------------------+
+                                                    ^              ^
+                                                    |              |
+                                              +---------+    +---------+
+                                              | Abeille |    | Colibri |
+                                              +---------+    +---------+
+
+ CycleSaison.changerSaison(s) : saison = s; notifier()
+ CycleSaison.notifier()       : pour chaque f dans fleurs : f.saisonChangee(saison)
+ Fleur.saisonChangee(s)       : ouverte = (s == saisonFloraison); si ouverte : notifier()
+ Fleur.notifier()             : pour chaque p dans pollinisateurs : p.butiner(this)
+ Abeille.butiner(f)           : (butine la fleur f)
+ Usage                        : cycle.abonner(tulipe); tulipe.abonner(abeille);
+                                cycle.changerSaison(PRINTEMPS)
+                                => la tulipe s'ouvre, l'abeille butine
+```
+
+A retenir :
+- L'Observable garde la liste de ses observeurs et expose `abonner` / `desabonner` / `notifier`. L'observeur expose la méthode appelée à la notification (`saisonChangee`, `butiner`).
+- `notifier()` est appelé à chaque changement d'état de l'observable.
+- Une même classe peut avoir les deux rôles (`Fleur`) : on obtient une chaîne de notifications.
+- Couplage faible : `CycleSaison` ne connaît que `Fleur` (abstraite), `Fleur` ne connaît que `Pollinisateur` (abstrait). Ajouter une `Rose` ou un `Papillon` ne change rien d'existant.
+- La flèche `<>` part toujours de l'observable vers la liste d'observeurs (`0..*`).
+
 ---
 
 ## Pièges d'examen
@@ -283,4 +350,5 @@ A retenir :
 - Façade simplifie plusieurs classes, Adapter rend une classe compatible.
 - Composite : `0..*` enfants. Décorateur : `1` composant.
 - Méthode de fabrique : héritage. Fabrique abstraite : objet fabrique passé au client, famille de produits.
+- Observateur : la liste des observeurs est dans l'Observable (pas l'inverse), et `notifier()` est appelé à chaque changement d'état. Ne pas confondre avec Commande (qui encapsule une action).
 - Commande : le `undo()` doit restaurer l'état exact d'avant, donc la commande mémorise l'état (ou la quantité réellement transférée) dans `exec()`.
