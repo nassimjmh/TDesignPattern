@@ -1,5 +1,12 @@
 package commande;
 
+import commande.water.Can;
+import commande.water.Invoker;
+import commande.water.Simulator;
+import commande.water.command.Command;
+import commande.water.command.DecantCommand;
+import commande.water.command.EmptyCommand;
+import commande.water.command.FillCommand;
 
 public class Main {
 	public static void main(String[] args) {

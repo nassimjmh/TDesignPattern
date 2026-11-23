@@ -1,5 +1,9 @@
 package facade;
 
+import facade.client.ClientNotUsingFacade;
+import facade.client.ClientUsingFacade;
+import facade.client.SecurityFacade;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("=== Sans façade (le client manipule tous les composants) ===");

@@ -88,6 +88,25 @@ Solution pour obtenir 4 L avec 3 L et 5 L : remplir 5, transvaser 5→3, vider 3
 - Annuler plusieurs fois = dépiler (dernier exécuté = premier annulé).
 - Ne pas confondre avec Observateur : la Commande encapsule une **action**, l'Observateur une **notification**.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+commande/
+├── water/
+│   ├── command/
+│   │   ├── AbstractCommand.java
+│   │   ├── Command.java
+│   │   ├── DecantCommand.java
+│   │   ├── EmptyCommand.java
+│   │   └── FillCommand.java
+│   ├── Can.java
+│   ├── Invoker.java
+│   └── Simulator.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

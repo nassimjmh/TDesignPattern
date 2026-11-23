@@ -1,5 +1,10 @@
 package abstractfactory;
 
+import abstractfactory.factory.BombedMazeFactory;
+import abstractfactory.factory.EnchantedMazeFactory;
+import abstractfactory.factory.MazeFactory;
+import abstractfactory.game.MazeGameAbstractFactory;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("Simple maze using a factory");

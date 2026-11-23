@@ -1,5 +1,10 @@
 package factory;
 
+import factory.game.BombedMazeCreator;
+import factory.game.EnchantedMazeCreator;
+import factory.game.MazeGameCreator;
+import factory.game.SimpleMazeGame;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("=== Sans pattern : SimpleMazeGame (code dupliqué pour chaque variante) ===");

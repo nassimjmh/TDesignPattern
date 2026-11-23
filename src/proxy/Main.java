@@ -1,5 +1,10 @@
 package proxy;
 
+import proxy.provider.Provider;
+import proxy.provider.RealProvider;
+import proxy.proxy.InvoiceProxy;
+import proxy.proxy.ProtectionProxy;
+
 public class Main {
 	private static void run(Provider p) {
 		p.service1();

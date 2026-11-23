@@ -77,6 +77,39 @@ Inconvénients de la modélisation par booléens (question 3) : classe `Boisson`
 - Le décorateur implémente **la même interface** que ce qu'il décore, et **contient** un composant.
 - Décorateur vs Proxy : le décorateur **ajoute** du comportement, le proxy **contrôle l'accès**.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+decorator/
+├── beverage/
+│   ├── condiment/
+│   │   ├── CondimentDecorator.java
+│   │   ├── Milk.java
+│   │   ├── Mocha.java
+│   │   ├── Soy.java
+│   │   └── Whip.java
+│   ├── Beverage.java
+│   ├── Chocolate.java
+│   ├── Coffee.java
+│   ├── Decaf.java
+│   ├── Espresso.java
+│   └── Tea.java
+├── food/
+│   ├── Cake.java
+│   ├── Cookie.java
+│   ├── Donut.java
+│   ├── Food.java
+│   ├── Muffin.java
+│   └── Sandwich.java
+├── order/
+│   ├── Menu.java
+│   ├── Order.java
+│   └── OrderComposite.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

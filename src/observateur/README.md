@@ -76,6 +76,22 @@ Usage : `cycle.addPropertyChangeListener(f); f.addPropertyChangeListener(abeille
 - `java.util.Observable` / `Observer` sont **dépréciés** : utiliser `PropertyChangeSupport` (composition) + `PropertyChangeListener`.
 - `firePropertyChange` ne notifie **pas** si ancienne valeur == nouvelle valeur.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+observateur/
+├── flower/
+│   ├── observer/
+│   │   ├── Bee.java
+│   │   ├── HummingBird.java
+│   │   └── PollinatingAnimal.java
+│   ├── Flower.java
+│   └── SeasonCycle.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

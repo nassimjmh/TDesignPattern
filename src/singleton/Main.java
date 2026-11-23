@@ -1,5 +1,9 @@
 package singleton;
 
+import singleton.logging.LoggerEager;
+import singleton.logging.LoggerLazy;
+import singleton.logging.LoggerMultiton;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("=== TD1 : Logger en Singleton ===");

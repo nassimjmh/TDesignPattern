@@ -1,5 +1,15 @@
 package decorator;
 
+import decorator.beverage.Chocolate;
+import decorator.beverage.Coffee;
+import decorator.beverage.condiment.Milk;
+import decorator.beverage.condiment.Mocha;
+import decorator.beverage.condiment.Soy;
+import decorator.food.Muffin;
+import decorator.order.Menu;
+import decorator.order.Order;
+import decorator.order.OrderComposite;
+
 public class Main {
 	public static void main(String[] args) {
 		// menu + café avec double dose de moka + café avec soja et lait

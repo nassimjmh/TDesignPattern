@@ -1,5 +1,13 @@
 package composite;
 
+import composite.beverage.Chocolate;
+import composite.beverage.Coffee;
+import composite.food.Cake;
+import composite.food.Muffin;
+import composite.order.Menu;
+import composite.order.Order;
+import composite.order.OrderComposite;
+
 public class Main {
 	public static void main(String[] args) {
 		Order simpleOrder = new Cake();

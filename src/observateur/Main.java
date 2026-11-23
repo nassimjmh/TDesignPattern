@@ -1,6 +1,10 @@
 package observateur;
 
-import observateur.SeasonCycle.Season;
+import observateur.flower.Flower;
+import observateur.flower.SeasonCycle;
+import observateur.flower.SeasonCycle.Season;
+import observateur.flower.observer.Bee;
+import observateur.flower.observer.HummingBird;
 
 public class Main {
 	public static void main(String[] args) {

@@ -71,6 +71,20 @@ Multiton = Singleton généralisé : une instance **par clé** (ex. un logger "i
 - `getInstance()` doit être `static` (sinon il faudrait déjà une instance pour l'appeler).
 - Lazy en multi-thread : deux threads peuvent créer deux instances (ajouter `synchronized`).
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+singleton/
+├── logging/
+│   ├── Logger.java
+│   ├── LoggerEager.java
+│   ├── LoggerLazy.java
+│   └── LoggerMultiton.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

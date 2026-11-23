@@ -63,6 +63,34 @@ Différence avec la Méthode de fabrique (question 4) : ici la création est dé
 - Avec une seule méthode `createX`, ce n'est techniquement qu'une méthode de fabrique : pour une **vraie** fabrique abstraite, il faut une **famille** (au moins deux produits liés).
 - Ajouter une **nouvelle famille** est facile (nouvelle fabrique) ; ajouter un **nouveau produit** est coûteux (toutes les fabriques changent).
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+abstractfactory/
+├── factory/
+│   ├── BombedMazeFactory.java
+│   ├── EnchantedMazeFactory.java
+│   └── MazeFactory.java
+├── game/
+│   └── MazeGameAbstractFactory.java
+├── maze/
+│   ├── door/
+│   │   ├── Door.java
+│   │   └── MagicDoor.java
+│   ├── room/
+│   │   ├── EnchantedRoom.java
+│   │   ├── Room.java
+│   │   └── RoomWithABomb.java
+│   ├── wall/
+│   │   ├── BombedWall.java
+│   │   └── Wall.java
+│   ├── MapSite.java
+│   └── Maze.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

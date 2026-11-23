@@ -63,6 +63,24 @@ A retenir : le client ne connaît plus les classes du sous-système. Pas d'inter
 - Façade vs Adaptateur : la façade **simplifie** plusieurs classes ; l'adaptateur rend **une** classe compatible avec une interface attendue.
 - Le sous-système reste accessible directement (la façade n'est pas obligatoire).
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+facade/
+├── client/
+│   ├── ClientNotUsingFacade.java
+│   ├── ClientUsingFacade.java
+│   └── SecurityFacade.java
+├── security/
+│   ├── Alarm.java
+│   ├── Camera.java
+│   ├── Light.java
+│   └── Sensor.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

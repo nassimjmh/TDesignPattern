@@ -71,6 +71,21 @@ Types : `InvoiceProxy` = proxy **intelligent** ; `ProtectionProxy` = proxy **de 
 - Proxy vs Décorateur : même structure, intention différente (contrôle d'accès vs ajout de comportement).
 - Proxy distant : représentant **local** d'un objet stocké sur un serveur, accès comme s'il était local.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+proxy/
+├── provider/
+│   ├── Provider.java
+│   └── RealProvider.java
+├── proxy/
+│   ├── InvoiceProxy.java
+│   └── ProtectionProxy.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

@@ -65,6 +65,33 @@ Propriétés (question 4) : pas de duplication de `create()` ; pour une nouvelle
 - Méthode de fabrique : **héritage**. Fabrique abstraite : **objet** fabrique passé au client, **famille** de produits.
 - `anOperation()` utilise `factoryMethod()` : le Creator ne connaît pas la classe concrète.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+factory/
+├── game/
+│   ├── BombedMazeCreator.java
+│   ├── EnchantedMazeCreator.java
+│   ├── MazeGameCreator.java
+│   └── SimpleMazeGame.java
+├── maze/
+│   ├── door/
+│   │   ├── Door.java
+│   │   └── MagicDoor.java
+│   ├── room/
+│   │   ├── EnchantedRoom.java
+│   │   ├── Room.java
+│   │   └── RoomWithABomb.java
+│   ├── wall/
+│   │   ├── BombedWall.java
+│   │   └── Wall.java
+│   ├── MapSite.java
+│   └── Maze.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

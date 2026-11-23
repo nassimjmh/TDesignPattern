@@ -1,0 +1,76 @@
+package commande.water;
+
+import commande.water.command.Command;
+import commande.water.command.DecantCommand;
+import commande.water.command.EmptyCommand;
+import commande.water.command.FillCommand;
+import java.util.Scanner;
+
+public class Simulator {
+
+	private Can[] cans;
+	private int desiredVolume;
+	private Invoker invoker;
+	private static Scanner sc = new Scanner(System.in);
+
+	public Simulator(Can[] cans, int desiredVolume) {
+		this.cans = cans;
+		this.desiredVolume = desiredVolume;
+		this.invoker = new Invoker();
+	}
+
+	private Can chooseCan() {
+		int choice;
+		do {
+			for (int i = 0; i < cans.length; i++)
+				System.out.println((i + 1) + ". " + cans[i]);
+			choice = sc.nextInt();
+		} while (choice < 1 || choice > cans.length);
+		return cans[choice - 1];
+	}
+
+	public void start() {
+		while (true) {
+			int choice;
+			do {
+				System.out.println("1. Remplir un bidon");
+				System.out.println("2. Vider un bidon");
+				System.out.println("3. Transvaser un bidon dans un autre");
+				System.out.println("4. Annuler la dernière action");
+				System.out.println("5. Quitter");
+				choice = sc.nextInt();
+			} while (choice < 1 || choice > 5);
+			switch (choice) {
+			case 1:
+				invoker.pushCommand(new FillCommand(chooseCan()));
+				break;
+			case 2:
+				invoker.pushCommand(new EmptyCommand(chooseCan()));
+				break;
+			case 3:
+				invoker.pushCommand(new DecantCommand(chooseCan(), chooseCan()));
+				break;
+			case 4:
+				invoker.popLastCommand();
+				break;
+			case 5:
+				return;
+			}
+			for (Can c : cans) {
+				System.out.println(c);
+			}
+			for (Can c : cans) {
+				if (c.getVolume() == desiredVolume) {
+					System.out.println("Gagné !");
+					for (Can can : cans)
+						can.empty();
+					for (Command command : invoker) {
+						System.out.println(command);
+						command.execute();
+					}
+					return;
+				}
+			}
+		}
+	}
+}

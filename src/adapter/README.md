@@ -70,6 +70,17 @@ Rôles : Target = `Iterator`, Adaptee = `Enumeration`, Adapter = `EnumerationAda
 - `remove()` n'existe pas dans `Enumeration` : on lève `UnsupportedOperationException` (inutile depuis Java 8, méthode `default`).
 - Adapter / Proxy / Décorateur enveloppent tous un objet : l'adaptateur **change l'interface**, les deux autres la gardent.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+adapter/
+├── adapter/
+│   └── EnumerationAdapter.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :

@@ -82,6 +82,33 @@ Total : 8.72
 - Composite : `0..*` enfants. Décorateur : `1` composant.
 - Composite se focalise sur la **structure** (traiter uniformément individus et compositions), Décorateur sur l'**ajout de responsabilités**.
 
+## Arborescence
+
+Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du package) lance la démonstration.
+
+```
+composite/
+├── beverage/
+│   ├── Beverage.java
+│   ├── Chocolate.java
+│   ├── Coffee.java
+│   ├── Decaf.java
+│   ├── Espresso.java
+│   └── Tea.java
+├── food/
+│   ├── Cake.java
+│   ├── Cookie.java
+│   ├── Donut.java
+│   ├── Food.java
+│   ├── Muffin.java
+│   └── Sandwich.java
+├── order/
+│   ├── Menu.java
+│   ├── Order.java
+│   └── OrderComposite.java
+└── Main.java
+```
+
 ## Lancer
 
 Depuis la racine du dépôt (PowerShell) :
