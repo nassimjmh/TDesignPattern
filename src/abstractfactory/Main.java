@@ -11,7 +11,5 @@ public class Main {
 		System.out.println("Bombed maze using a factory");
 		System.out.println(MazeGameAbstractFactory.create(new BombedMazeFactory()));
 
-		System.out.println("=== Examen : decks de cartes cohérents (officielles / fan-art / collab) ===");
-		MainExamen.main(args);
 	}
 }

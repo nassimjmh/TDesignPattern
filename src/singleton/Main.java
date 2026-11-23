@@ -18,7 +18,5 @@ public class Main {
 		LoggerMultiton.getInstance("err").log("Bug...");
 		LoggerMultiton.getInstance("info").log("Bye."); // LOG2 : même instance que le premier "info"
 
-		System.out.println("\n=== Rattrapage : l'Anneau Unique ===");
-		MainRattrapage.main(args);
 	}
 }

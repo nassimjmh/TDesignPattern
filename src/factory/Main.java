@@ -21,7 +21,5 @@ public class Main {
 		System.out.println("Bombed maze using factory methods");
 		System.out.println(game.create());
 
-		System.out.println("=== Rattrapage : les forgerons ===");
-		MainRattrapage.main(args);
 	}
 }

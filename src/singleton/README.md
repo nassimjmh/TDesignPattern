@@ -1,4 +1,4 @@
-# Singleton (TD1 + rattrapage)
+# Singleton (TD1)
 
 ## Intention
 
@@ -56,29 +56,6 @@ A retenir : constructeur **privé**, attribut **statique** de son propre type, `
 ```
 
 Multiton = Singleton généralisé : une instance **par clé** (ex. un logger "info" et un logger "err").
-
-## Rattrapage : l'Anneau Unique
-
-```
- +--------------------------------------+        porteur   +------------------+
- |           AnneauUnique               |----------------->| «interface»      |
- +--------------------------------------+      0..1        |  Personnage      |
- | - INSTANCE : AnneauUnique   {static} |                  +------------------+
- | - estPorte : boolean                 |                  | + getNom()       |
- +--------------------------------------+                  +------------------+
- | - AnneauUnique()                     |                          ^
- | + getInstance() : AnneauUnique       |                          |
- | + getPorteur() / setPorteur(p)       |                     +--------+
- | + porter() / retirer()               |                     | Hobbit |
- +--------------------------------------+                     +--------+
-```
-
-Client (Q4b, classe `MainRattrapage`) :
-
-```java
-AnneauUnique.getInstance().setPorteur(new Hobbit("Bilbon"));
-AnneauUnique.getInstance().porter();
-```
 
 ## Lazy vs Eager
 

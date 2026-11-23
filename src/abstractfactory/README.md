@@ -1,4 +1,4 @@
-# Fabrique abstraite / Abstract Factory (TD4 + examen)
+# Fabrique abstraite / Abstract Factory (TD4)
 
 ## Intention
 
@@ -57,35 +57,6 @@ A retenir : le client ne connaît que `AbstractFactory` et les interfaces des pr
 ```
 
 Différence avec la Méthode de fabrique (question 4) : ici la création est déléguée à **un objet fabrique passé en paramètre** (composition), plus de sous-classe du jeu ; on peut **changer de famille à l'exécution** ; la fabrique regroupe **plusieurs** méthodes de création pour des produits liés.
-
-## Examen : decks cohérents
-
-Besoin : deux joueurs jouent avec des cartes de la même version (officielles, fan-art, collab), logique du jeu séparée de la représentation graphique, sans duplication quand on ajoute une version.
-
-```
- +---------+      +-------------------------+      +------------------------+
- | Joueur  |----->|   CarteGraphique        |----->|  «interface»           |
- | deck    | 0..60| - carte : Carte         |      |  Illustration          |
- +---------+      | - illustration          |      | + dessiner(g, l, h)    |
-                  +-------------------------+      +------------------------+
-                         |                              ^        ^        ^
-                         v                              |        |        |
-                  +-----------+          IllustrationOfficielle  FanArt    Collab
-                  |  Carte    | (logique)
-                  +-----------+
-
-        +--------------------------------------+
-        |   «interface» FabriqueIllustrations  |
-        +--------------------------------------+
-        | + creerIllustrationPikachu()         |
-        | + creerIllustrationEnergieElectrique()|
-        +--------------------------------------+
-              ^               ^              ^
-   FabriqueOfficielle  FabriqueFanArt   FabriqueCollab
-   (chacune ne crée que des illustrations de sa version)
-```
-
-Code client (Q10d) : `composerDeck("Sacha", new FabriqueOfficielle())` pour les deux joueurs.
 
 ## Pièges d'examen
 

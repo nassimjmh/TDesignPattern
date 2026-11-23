@@ -4,16 +4,16 @@ Chaque package contient le corrigé du TD correspondant, un `Main`, et un `READM
 
 | Pattern | Package | Source |
 |---|---|---|
-| Singleton | [singleton](src/singleton/README.md) | TD1 + rattrapage (Anneau Unique) |
+| Singleton | [singleton](src/singleton/README.md) | TD1 |
 | Façade | [facade](src/facade/README.md) | TD1 |
 | Adaptateur | [adapter](src/adapter/README.md) | TD2 |
 | Procuration | [proxy](src/proxy/README.md) | TD2 |
 | Composite | [composite](src/composite/README.md) | TD3 |
-| Décorateur | [decorator](src/decorator/README.md) | TD3 + examen (effets visuels) |
-| Méthode de fabrique | [factory](src/factory/README.md) | TD4 + rattrapage (forgerons) |
-| Fabrique abstraite | [abstractfactory](src/abstractfactory/README.md) | TD4 + examen (decks) |
+| Décorateur | [decorator](src/decorator/README.md) | TD3 |
+| Méthode de fabrique | [factory](src/factory/README.md) | TD4 |
+| Fabrique abstraite | [abstractfactory](src/abstractfactory/README.md) | TD4 |
 | Commande | [commande](src/commande/README.md) | TD5 |
-| Observateur | [observateur](src/observateur/README.md) | TD5 + rattrapage (Anneau, Oeil de Sauron) |
+| Observateur | [observateur](src/observateur/README.md) | TD5 |
 | Itérateur | `src/iterator` | TD6 (inchangé) |
 
 ---

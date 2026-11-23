@@ -1,4 +1,4 @@
-# Méthode de fabrique / Factory Method (TD4 + rattrapage)
+# Méthode de fabrique / Factory Method (TD4)
 
 ## Intention
 
@@ -59,30 +59,6 @@ A retenir : variation **par héritage** (sous-classe de `Creator`).
 Propriétés (question 4) : pas de duplication de `create()` ; pour une nouvelle variante il faut **une sous-classe de Creator** ; on ne peut pas changer de famille à l'exécution sans changer d'objet jeu ; un seul produit créé par méthode (pas de garantie de cohérence entre pièces, cf. Fabrique abstraite).
 
 `SimpleMazeGame` montre la solution **sans pattern** (une méthode par variante, code copié-collé).
-
-## Rattrapage : les forgerons
-
-Pattern : **Méthode de fabrique** (un forgeron = un seul type d'arme, de nouvelles armes sans modifier le code existant).
-
-```
- +---------------------------------+  utilise   +------------------------+
- |      «abstract» Forgeron        |- - - - - ->| «abstract» Arme        |
- +---------------------------------+            +------------------------+
- | # creerArme() : Arme    {abs}   |            | - puissance : int      |
- | + interagir(p : Personnage)     |            | + addPuissance(x)      |
- +---------------------------------+            +------------------------+
-     ^          ^          ^                       ^        ^       ^
-     |          |          |                       |        |       |
- ForgeronEpee ForgeronArc ForgeronHache          Epee      Arc    Hache
-   creerArme()  creerArme() creerArme()
-   new Epee()   new Arc()   new Hache()
-
- interagir(p) : a = creerArme(); a.addPuissance(5); p.setArme(a)
-
- Personnage ---- arme : 0..1 ----> Arme
-```
-
-Code client : `new ForgeronEpee().interagir(aragorn); new ForgeronArc().interagir(legolas); new ForgeronHache().interagir(gimli);`
 
 ## Pièges d'examen
 

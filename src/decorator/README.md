@@ -1,4 +1,4 @@
-# Décorateur (TD3, condiments + examen, effets visuels)
+# Décorateur (TD3, condiments)
 
 ## Intention
 
@@ -71,40 +71,6 @@ new Milk(new Soy(new Coffee()))      // café, soja, lait : 2.35
 Résultat attendu : `Total : 9.92`.
 
 Inconvénients de la modélisation par booléens (question 3) : classe `Boisson` qui change à chaque nouveau condiment, pas de dose double sans nouveaux attributs, prix et affichage pleins de `if`.
-
-## Examen : effets visuels sur les cartes
-
-Ajouter dynamiquement, **sans modifier les classes existantes**, un numéro de série (collector) ou un filtre coloré translucide (violet = empoisonné, gris = paralysé), et pouvoir les **combiner**.
-
-```
-        +-----------------------------+<>---------------+
-        |       «interface»           |                  | carteDecoree : 1
-        |       CarteGraphique        |                  |
-        +-----------------------------+                  |
-        | + getCarte() : Carte        |                  |
-        | + genererImage(l,h)         |                  |
-        +-----------------------------+                  |
-              ^                ^                         |
-              |                |                         |
- +----------------------+  +--------------------------------+
- |CarteGraphiquePikachu |  |  «abstract» DecorateurCarte    |<>
- | (ConcreteComponent)  |  |  # carteDecoree                |
- +----------------------+  +--------------------------------+
-                                  ^                 ^
-                                  |                 |
-                          +--------------+   +----------------+
-                          | NumeroSerie  |   | FiltreCouleur  |
-                          +--------------+   +----------------+
-                          | genererImage:|   | genererImage:  |
-                          |  super + txt |   |  super + rect  |
-                          +--------------+   +----------------+
-```
-
-Code client (Q9d) :
-
-```java
-CarteGraphique c = new FiltreCouleur(new NumeroSerie(new CarteGraphiquePikachu(), 42, 500), grisTranslucide);
-```
 
 ## Pièges d'examen
 

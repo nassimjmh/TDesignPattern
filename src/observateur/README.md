@@ -1,4 +1,4 @@
-# Observateur / Observer (TD5 fleurs + rattrapage)
+# Observateur / Observer (TD5, fleurs)
 
 ## Intention
 
@@ -68,27 +68,6 @@ Chaînes de notification : `SeasonCycle` -> `Flower` -> `PollinatingAnimal`. `Fl
 ```
 
 Usage : `cycle.addPropertyChangeListener(f); f.addPropertyChangeListener(abeille); cycle.next();`
-
-## Rattrapage : l'Anneau Unique
-
-Besoin : quand l'anneau est passé au doigt, l'Oeil de Sauron et les Nazgûls (graphismes, musique...) réagissent, **avec un couplage minimal** avec `AnneauUnique` -> **Observateur**.
-
-```
- +-----------------------------------+   listeners  +-------------------------------+
- |       AnneauUnique (Observable)   |<>----------->|  «interface»                  |
- +-----------------------------------+    0..*      |  PropertyChangeListener       |
- | - estPorte : boolean              |              +-------------------------------+
- | - porteur : Personnage            |                     ^              ^
- | - pcs : PropertyChangeSupport     |                     |              |
- +-----------------------------------+            +----------------+  +----------+
- | + porter() : estPorte = true;     |            | OeilDeSauron   |  | Nazgul   |
- |     firePropertyChange("estPorte")|            | devient rouge, |  | avance   |
- | + retirer()                       |            | regarde porteur|  | vers le  |
- | + addPropertyChangeListener(l)    |            +----------------+  | porteur  |
- +-----------------------------------+                                +----------+
-```
-
-Code client (Q5d) : `anneau.addPropertyChangeListener(oeil); anneau.addPropertyChangeListener(nazgul); anneau.setPorteur(frodon); anneau.porter();`
 
 ## Pièges d'examen
 

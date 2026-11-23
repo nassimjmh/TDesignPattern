@@ -26,7 +26,7 @@ Famille : **structure**.
 Adapter.request() : adaptee.specificRequest()
 ```
 
-### Adaptateur d'objet vs adaptateur de classe (question du rattrapage)
+### Adaptateur d'objet vs adaptateur de classe
 
 | | Adaptateur d'**objet** | Adaptateur de **classe** |
 |---|---|---|

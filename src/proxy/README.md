@@ -69,7 +69,7 @@ Types : `InvoiceProxy` = proxy **intelligent** ; `ProtectionProxy` = proxy **de 
 
 - Proxy et RealSubject implémentent le **même** `Subject` ; le Proxy a une **référence** vers le RealSubject.
 - Proxy vs Décorateur : même structure, intention différente (contrôle d'accès vs ajout de comportement).
-- Proxy distant (examen) : représentant **local** d'un Pokémon stocké sur un serveur, accès comme s'il était local.
+- Proxy distant : représentant **local** d'un objet stocké sur un serveur, accès comme s'il était local.
 
 ## Lancer
 

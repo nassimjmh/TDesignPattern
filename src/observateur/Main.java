@@ -22,7 +22,5 @@ public class Main {
 			cycle.next();
 		}
 
-		System.out.println("\n=== Rattrapage : l'Anneau Unique, l'Oeil de Sauron et les Nazgûls ===");
-		MainRattrapage.main(args);
 	}
 }

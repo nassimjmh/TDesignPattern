@@ -10,7 +10,5 @@ public class Main {
 		System.out.println("Commande avec condiments :");
 		order.total(); // attendu : 5.22 / 2.35 / 2.35 / Total 9.92
 
-		System.out.println("\n=== Examen : effets visuels sur les cartes (décorateur) ===");
-		MainExamen.main(args);
 	}
 }
