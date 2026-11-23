@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 public class Simulator {
 
-	private final Can[] cans;
+	private Can[] cans;
 	private int desiredVolume;
-
+	private Invoker invoker;
 	private static Scanner sc = new Scanner(System.in);
 
 	public Simulator(Can[] cans, int desiredVolume) {
 		this.cans = cans;
 		this.desiredVolume = desiredVolume;
+		this.invoker = new Invoker();
 	}
 
 	private Can chooseCan() {
@@ -37,16 +38,20 @@ public class Simulator {
 				choice = sc.nextInt();
 			} while (choice < 1 || choice > 5);
 			switch (choice) {
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-				case 5:
-					return;
+			case 1:
+				invoker.pushCommand(new FillCommand(chooseCan()));
+				break;
+			case 2:
+				invoker.pushCommand(new EmptyCommand(chooseCan()));
+				break;
+			case 3:
+				invoker.pushCommand(new DecantCommand(chooseCan(), chooseCan()));
+				break;
+			case 4:
+				invoker.popLastCommand();
+				break;
+			case 5:
+				return;
 			}
 			for (Can c : cans) {
 				System.out.println(c);
@@ -54,14 +59,15 @@ public class Simulator {
 			for (Can c : cans) {
 				if (c.getVolume() == desiredVolume) {
 					System.out.println("Gagné !");
+					for (Can can : cans)
+						can.empty();
+					for (Command command : invoker) {
+						System.out.println(command);
+						command.execute();
+					}
 					return;
 				}
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		Can[] cans = { new Can(3), new Can(5) };
-		new Simulator(cans, 4).start();
 	}
 }

@@ -1,6 +1,13 @@
 package proxy;
 
 public interface Provider {
-    public void service1();
-    public void service2();
+
+	void service1();
+
+	void service2();
+
+	void service3();
+
+	void service4();
+
 }

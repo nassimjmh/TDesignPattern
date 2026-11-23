@@ -1,9 +1,15 @@
 package composite;
 
-public class Cookie extends Encas{
+public class Cookie extends Food {
 
-    public Cookie() {
-        super(1.95,"Cookie");
-    }
+	@Override
+	public double getPrice() {
+		return 1.95;
+	}
+	
+	@Override
+	public String toString() {
+		return "cookie";
+	}
 
 }

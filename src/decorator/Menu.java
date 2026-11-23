@@ -1,21 +1,25 @@
 package decorator;
 
-public class Menu extends ClassCompo implements Composite {
-    Boisson b;
-    Encas e;
 
-    public Menu(Boisson b, Encas e){
-        this.b = b;
-        this.e = e;
-    }
+public class Menu extends Order {
 
-    public String ticket(){
-        double total =  (b.prix() + e.prix()) * 0.90;
+	private Beverage beverage;
 
-        return "menu (" + b.getName() + " + " + e.getName() + " ) : " + total;
-    }
+	private Food food;
 
-    public double prix() {
-        return (b.prix() + e.prix()) * 0.90;
-    }
+	public Menu(Beverage b, Food f) {
+		this.beverage = b;
+		this.food = f;
+	}
+
+	@Override
+	public double getPrice() {
+		return (this.beverage.getPrice() + this.food.getPrice()) * 0.9;
+	}
+
+	@Override
+	public String toString() {
+		return "menu (" + this.beverage + " + " + this.food + ")";
+	}
+
 }
