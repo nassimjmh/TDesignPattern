@@ -1,4 +1,4 @@
-package iterator.boolexpr;
+package visiteur.boolexpr;
 
 public class Not extends UnaryOperator {
 

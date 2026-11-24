@@ -1,4 +1,4 @@
-package iterator.boolexpr;
+package visiteur.boolexpr;
 
 public abstract class UnaryOperator implements Operator {
 
