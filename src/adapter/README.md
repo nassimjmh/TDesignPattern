@@ -65,6 +65,57 @@ Adapter.request() : adaptee.specificRequest()
 
 Rôles : Target = `Iterator`, Adaptee = `Enumeration`, Adapter = `EnumerationAdapter`, Client = la méthode `print`.
 
+## Autres exercices du TD
+
+### (a) Liste doublement chaînée -> pile
+
+```
+ +--------+     +-------------------+
+ | Client |---->|  «interface»      |
+ +--------+     |  Stack            |
+                +-------------------+
+                | + push(o)         |
+                | + pop() : Object  |
+                | + top() : Object  |
+                +-------------------+
+                         ^
+                         |
+                +-------------------+  list  +---------------------+
+                | ListStackAdapter  |------->| LinkedList<Object>  |
+                +-------------------+        | (liste doublement   |
+                | push : addFirst   |        |  chaînée, Adaptee)  |
+                | pop  : removeFirst|        +---------------------+
+                | top  : getFirst   |
+                +-------------------+
+```
+
+Le sommet de la pile = la tête de liste. `pop` / `top` sur pile vide : `NoSuchElementException` (comportement de `LinkedList`).
+
+### (b) Ensemble d'entiers -> file de priorité
+
+```
+ +--------+     +------------------------+
+ | Client |---->|  «interface»           |
+ +--------+     |  PriorityQueue         |
+                +------------------------+
+                | + add(o)               |
+                | + size() : int         |
+                | + removeSmallest()     |
+                +------------------------+
+                           ^
+                           |
+                +--------------------------+  set  +------------------+
+                | SetPriorityQueueAdapter  |------>| TreeSet<Integer> |
+                +--------------------------+       | (Adaptee, trié)  |
+                | add : set.add((Integer)o)|       +------------------+
+                | size : set.size()        |
+                | removeSmallest :         |
+                |   set.pollFirst()        |
+                +--------------------------+
+```
+
+À retenir : il faut un ensemble **trié** (`TreeSet`) pour que le plus petit soit le premier. Un ensemble ignore les **doublons** : `add(3)` deux fois ne compte qu'une fois (limite de l'adaptation, à signaler).
+
 ## Pièges d'examen
 
 - `remove()` n'existe pas dans `Enumeration` : on lève `UnsupportedOperationException` (inutile depuis Java 8, méthode `default`).
@@ -78,6 +129,12 @@ Les sous-packages reprennent ceux du .jar du corrigé ; `Main` (à la racine du 
 adapter/
 ├── adapter/
 │   └── EnumerationAdapter.java
+├── stack/
+│   ├── Stack.java
+│   └── ListStackAdapter.java
+├── priority/
+│   ├── PriorityQueue.java
+│   └── SetPriorityQueueAdapter.java
 └── Main.java
 ```
 
