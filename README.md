@@ -14,7 +14,8 @@ Chaque package contient le corrigé du TD correspondant, un `Main`, et un `READM
 | Fabrique abstraite | [abstractfactory](src/abstractfactory/README.md) | TD4 |
 | Commande | [commande](src/commande/README.md) | TD5 |
 | Observateur | [observateur](src/observateur/README.md) | TD5 |
-| Itérateur | `src/iterator` | TD6 (inchangé) |
+| Itérateur | [iterator](src/iterator/README.md) | TD6 (sans corrigé : exemples) |
+| Visiteur | [visiteur](src/visiteur/README.md) | TD6 (sans corrigé : exemples) |
 
 ---
 

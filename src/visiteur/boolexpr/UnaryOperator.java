@@ -1,7 +1,6 @@
 package visiteur.boolexpr;
 
 public abstract class UnaryOperator implements Operator {
-
 	protected Node operand;
 
 	public UnaryOperator(Node operand) {
@@ -11,5 +10,4 @@ public abstract class UnaryOperator implements Operator {
 	public Node getOperand() {
 		return operand;
 	}
-
 }
