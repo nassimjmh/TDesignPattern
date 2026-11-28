@@ -1,7 +1,9 @@
-package visiteur.boolexpr;
+package visiteur.boolexp;
 
-/** ConcreteElement. */
+import visiteur.boolexp.visitor.Visitor;
+
 public class Not extends UnaryOperator {
+
 	public Not(Node operand) {
 		super(operand);
 	}
@@ -10,4 +12,5 @@ public class Not extends UnaryOperator {
 	public void accept(Visitor v) {
 		v.visit(this);
 	}
+
 }

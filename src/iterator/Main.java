@@ -18,7 +18,10 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("=== Exemple : une collection Iterable (boucle for-each) ===");
+		System.out.println("=== Corrigé TD6 : Tree.iterator() selon l'ordre choisi ===");
+		iterator.tree.Main.main(args);
+
+		System.out.println("\n=== Exemple : une collection Iterable (boucle for-each) ===");
 		Playlist p = new Playlist().ajouter("Intro").ajouter("Refrain").ajouter("Outro");
 		for (String titre : p) { // le for-each appelle iterator(), hasNext() et next()
 			System.out.println("- " + titre);

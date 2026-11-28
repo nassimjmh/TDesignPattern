@@ -1,4 +1,5 @@
-package visiteur.boolexpr;
+package visiteur.boolexp;
 
 public interface Operator extends Node {
+
 }

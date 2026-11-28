@@ -1,51 +1,38 @@
 package iterator.tree;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+
+import iterator.tree.Tree.Order;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        //         4
-        //       /   \
-        //      2     6
-        //     / \   / \
-        //    1   3 5   7
-        Tree<Integer> tree = new Tree<>(4,
-                new Tree<>(2, new Tree<>(1), new Tree<>(3)),
-                new Tree<>(6, new Tree<>(5), new Tree<>(7)));
+	private static <V> void iterate(Tree<V> t) {
+		System.out.print("Parcours " + t.getOrder() + " : ");
+		for (V v : t) {
+			System.out.print(v + " ");
+		}
+		System.out.println();
+	}
 
-        test("Infixe", tree, Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        test("Prefixe", tree, Arrays.asList(4, 2, 1, 3, 6, 5, 7));
-        test("Suffixe", tree, Arrays.asList(1, 3, 2, 5, 7, 6, 4));
-    }
-
-    /**
-     * Teste la classe du même package (constructeur(Tree), parcours(Tree),
-     * champ privé "list") par réflexion : Main compile même si la classe
-     * n'existe pas encore.
-     */
-    private static void test(String className, Tree<Integer> tree, List<Integer> expected) {
-        System.out.println("=== " + className + " ===");
-        try {
-            Class<?> c = Class.forName("iterator.tree." + className);
-            Object o = c.getConstructor(Tree.class).newInstance(tree);
-            Method m = c.getMethod("parcours", Tree.class);
-            m.invoke(o, tree);
-
-            Field f = c.getDeclaredField("list");
-            f.setAccessible(true);
-            List<?> result = (List<?>) f.get(o);
-
-            System.out.println("Attendu : " + expected);
-            System.out.println("Obtenu  : " + result);
-            System.out.println(expected.equals(result) ? "OK" : "KO");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Classe pas encore créée, ignoré");
-        } catch (Exception e) {
-            System.out.println("Erreur : " + e);
-        }
-    }
+	public static void main(String[] args) {
+		Tree<Integer> t1 = new Tree<Integer>(2, new Tree<Integer>(1, null, null), new Tree<Integer>(3, null, null));
+		Tree<Integer> t2 = new Tree<Integer>(4,
+				new Tree<Integer>(1, null, new Tree<Integer>(2, null, new Tree<Integer>(3, null, null))),
+				new Tree<Integer>(8,
+						new Tree<Integer>(6, new Tree<Integer>(5, null, null), new Tree<Integer>(7, null, null)),
+						null));
+		Tree<Integer> t3 = new Tree<Integer>(1, new Tree<Integer>(2, new Tree<Integer>(3, null, null), null), null);
+		List<Tree<Integer>> trees = new LinkedList<>();
+		trees.add(t1);
+		trees.add(t2);
+		trees.add(t3);
+		for (Tree<Integer> t : trees) {
+			iterate(t);
+			t.setOrder(Order.PREFIXE);
+			iterate(t);
+			t.setOrder(Order.POSTFIXE);
+			iterate(t);
+		}
+	}
 }

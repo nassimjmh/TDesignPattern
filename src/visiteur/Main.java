@@ -7,25 +7,24 @@ import visiteur.batiment.Maison;
 import visiteur.batiment.Pompier;
 import visiteur.batiment.Quartier;
 import visiteur.batiment.Usine;
-import visiteur.boolexpr.And;
-import visiteur.boolexpr.Bool;
-import visiteur.boolexpr.EvalVisitor;
-import visiteur.boolexpr.Node;
-import visiteur.boolexpr.Not;
-import visiteur.boolexpr.Or;
-import visiteur.boolexpr.PrintVisitor;
+import visiteur.boolexp.And;
+import visiteur.boolexp.Bool;
+import visiteur.boolexp.Node;
+import visiteur.boolexp.Not;
+import visiteur.boolexp.Or;
+import visiteur.boolexp.visitor.DisplayVisitor;
+import visiteur.boolexp.visitor.EvalVisitor;
 
 public class Main {
 	private static void show(Node expr) {
-		PrintVisitor printer = new PrintVisitor();
-		expr.accept(printer);
+		expr.accept(new DisplayVisitor());
 		EvalVisitor evaluator = new EvalVisitor();
 		expr.accept(evaluator);
-		System.out.println(printer.getResult() + " = " + evaluator.getResult());
+		System.out.println(" = " + evaluator.getValue());
 	}
 
 	public static void main(String[] args) {
-		System.out.println("=== TD6 : expressions booléennes (affichage et évaluation) ===");
+		System.out.println("=== Corrigé TD6 : expressions booléennes (affichage et évaluation) ===");
 		// ((true Or false) And (Not true)) = false (exemple de l'énoncé)
 		show(new And(new Or(new Bool(true), new Bool(false)), new Not(new Bool(true))));
 		show(new Or(new Bool(false), new Not(new Bool(false))));

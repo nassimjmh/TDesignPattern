@@ -1,7 +1,9 @@
-package visiteur.boolexpr;
+package visiteur.boolexp;
 
-/** ConcreteElement : une constante booléenne (feuille). */
+import visiteur.boolexp.visitor.Visitor;
+
 public class Bool implements Node {
+
 	private boolean value;
 
 	public Bool(boolean value) {
@@ -14,6 +16,7 @@ public class Bool implements Node {
 
 	@Override
 	public void accept(Visitor v) {
-		v.visit(this); // double dispatch : ici, this est statiquement un Bool
+		v.visit(this);
 	}
+
 }

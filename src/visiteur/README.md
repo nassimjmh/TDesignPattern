@@ -1,6 +1,6 @@
 # Visiteur / Visitor (TD6 + exemple des bâtiments)
 
-> **Pas encore de corrigé** pour ce TD. `visiteur/boolexpr` part des classes du .jar `tree.jar` (que vous aviez déjà) auxquelles j'ai ajouté `accept()` et deux visiteurs ; `visiteur/batiment` reprend l'exemple d'une conversation partagée. À comparer avec la correction quand elle arrivera.
+> Corrigé : `visiteur/boolexp/` (extrait de `td6.jar`, avec `visitor/` : `Visitor`, `DisplayVisitor`, `EvalVisitor`, `Main`). `visiteur/batiment` est un exemple complémentaire (agents et bâtiments), écrit ici.
 
 ## Intention
 
@@ -33,7 +33,7 @@ A retenir : **double dispatch**. `element.accept(visitor)` (1er dispatch, polymo
 Avantages : nouvelle opération = nouveau visiteur, sans toucher aux éléments ; un visiteur peut **accumuler un état** ; il parcourt des éléments de **types différents** (contrairement à un itérateur).
 Inconvénient : ajouter un **nouveau type d'élément** oblige à modifier **toutes** les classes de visiteurs. A utiliser quand la **structure change rarement** mais que les opérations changent souvent.
 
-## UML de l'exercice (TD6, expressions booléennes)
+## UML de l'exercice (TD6, expressions booléennes : corrigé)
 
 ```
  +----------------------------+            +------------------------------+
@@ -45,8 +45,8 @@ Inconvénient : ajouter un **nouveau type d'élément** oblige à modifier **tou
  +-----------+   +--------------------+    +------------------------------+
  |   Bool    |   | «interface»        |            ^               ^
  | - value   |   | Operator           |    +----------------+ +----------------+
- +-----------+   +--------------------+    |  PrintVisitor  | |  EvalVisitor   |
-                      ^          ^         | - sb           | | - result       |
+ +-----------+   +--------------------+    |  DisplayVisitor  | |  EvalVisitor   |
+                      ^          ^         | - (aucun état) | | - value       |
           +--------------------+ +--------------------+ +----------------+ +----------------+
           | «abstract»         | | «abstract»         |
           | BinaryOperator     | | UnaryOperator      |
@@ -56,11 +56,13 @@ Inconvénient : ajouter un **nouveau type d'élément** oblige à modifier **tou
               And         Or            Not
 
  Bool.accept(v)           : v.visit(this)
- EvalVisitor.visit(And a) : a.left.accept(this); l = result; a.right.accept(this); result = l && result
- PrintVisitor.visit(Not n): sb.append("(Not "); n.operand.accept(this); sb.append(")")
+ EvalVisitor.visit(And n) : n.getLeftOperand().accept(this); left = value; n.getRightOperand().accept(this); value = left && value
+ DisplayVisitor.visit(Not n): print("(NOT "); n.getOperand().accept(this); print(")")
 ```
 
-Résultat : `((true Or false) And (Not true)) = false`.
+Résultat : `((true OR false) AND (NOT true))` vaut `false`.
+
+Le corrigé affiche directement sur la sortie standard (`DisplayVisitor`) et garde le résultat dans un champ `value` (`EvalVisitor`) : on évalue l'opérande gauche, on mémorise `left`, puis on évalue le droit.
 
 Inconvénients de la version sans pattern (question 3 du TD) : chaque nouvelle opération (affichage, évaluation, simplification...) oblige à **modifier toutes les classes de noeuds** et mélange la structure et les traitements.
 
@@ -94,6 +96,8 @@ Ajouter un agent (ex. `Douanier`) : une classe de plus, **aucun bâtiment modifi
 
 ## Arborescence
 
+Les sous-packages reprennent ceux de `td6.jar` ; `batiment/` et le `Main` racine sont ajoutés.
+
 ```
 visiteur/
 ├── batiment/
@@ -106,21 +110,22 @@ visiteur/
 │   ├── Quartier.java
 │   ├── Usine.java
 │   └── Visiteur.java
-├── boolexpr/
+├── boolexp/
+│   ├── visitor/
+│   │   ├── DisplayVisitor.java
+│   │   ├── EvalVisitor.java
+│   │   ├── Main.java
+│   │   └── Visitor.java
 │   ├── And.java
 │   ├── BinaryOperator.java
 │   ├── Bool.java
-│   ├── EvalVisitor.java
 │   ├── Node.java
 │   ├── Not.java
 │   ├── Operator.java
 │   ├── Or.java
-│   ├── PrintVisitor.java
-│   ├── UnaryOperator.java
-│   └── Visitor.java
+│   └── UnaryOperator.java
 └── Main.java
 ```
-
 
 ## Lancer
 
